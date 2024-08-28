@@ -14,6 +14,7 @@
         <module>module2/solid</module>
         <module>module2/spotless</module>
         <module>module3</module>
+        <module>module4</module>
     </modules>
 
     <properties>

@@ -9,6 +9,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -62,5 +64,10 @@ class UserServiceTest {
                 () -> userService.findById(null));
         verify(userRepository, times(0)).findById(
                 Mockito.any());
+    }
+
+    public static void main(String[] args) {
+        String[] s = "Java    is     the best".split(" ");
+        System.out.println(Arrays.toString(s));
     }
 }
