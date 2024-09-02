@@ -15,6 +15,7 @@
         <module>module2/spotless</module>
         <module>module3</module>
         <module>module4</module>
+        <module>module5</module>
     </modules>
 
     <properties>
