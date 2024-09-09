@@ -16,6 +16,7 @@
         <module>module3</module>
         <module>module4</module>
         <module>module5</module>
+        <module>module6</module>
     </modules>
 
     <properties>
@@ -58,6 +59,19 @@
             <artifactId>mockito-core</artifactId>
             <version>5.12.0</version>
             <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.4</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>5.1.0</version>
         </dependency>
 
 
