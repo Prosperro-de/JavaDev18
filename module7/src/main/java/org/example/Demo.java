@@ -9,9 +9,10 @@ public class Demo {
 //        Customer customer = customerService.registerCustomer();
 //        System.out.println("customer = " + customer);
 
-        List<Customer> customerList = createCustomerList();
-        customerService.registerCustomers(customerList);
-        customerList.forEach(System.out::println);
+        customerService.findAllCustomers().forEach(System.out::println);
+//        List<Customer> customerList = createCustomerList();
+//        customerService.registerCustomers(customerList);
+//        customerList.forEach(System.out::println);
 
     }
 

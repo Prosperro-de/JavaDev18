@@ -1,6 +1,4 @@
-package org.example;
-
-import org.example.statement.CustomerDao;
+package org.example.statement;
 
 import java.sql.SQLException;
 
@@ -21,22 +19,22 @@ public class JdbcDemo {
 //        }
 
         CustomerDao customerDao = new CustomerDao();
-//        customerDao.printAllCustomers();
-//        customerDao.getAll().forEach(System.out::println);
+        customerDao.printAllCustomers();
+        customerDao.getAll().forEach(System.out::println);
 //        customerDao.createDefaultCustomer();
 
-        Customer customer = Customer.builder()
-                .firstName("Oleg")
-                .lastName("Shevchenko")
-                .email("stepan63@gmail.com")
-                .telNumber("12334455")
-                .postCode("33-44")
-                .build();
-//        customer.setId(13L);
-        customerDao.createCustomer(customer);
-//        customerDao.updateCustomer(customer);
-
-//        customerDao.deleteCustomerById(13L);
-        String s ="";
+//        Customer customer = Customer.builder()
+//                .firstName("Oleg")
+//                .lastName("Shevchenko")
+//                .email("stepan63@gmail.com")
+//                .telNumber("12334455")
+//                .postCode("33-44")
+//                .build();
+////        customer.setId(13L);
+//        customerDao.createCustomer(customer);
+////        customerDao.updateCustomer(customer);
+//
+////        customerDao.deleteCustomerById(13L);
+//        String s ="";
     }
 }

@@ -1,0 +1,1 @@
+ALTER TABLE order_items ADD column price DECIMAL(10, 2);

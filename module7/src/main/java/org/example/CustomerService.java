@@ -38,4 +38,8 @@ public class CustomerService {
     public List<Customer> registerCustomers(List<Customer> customers) {
         return customerDao.createCustomers(customers);
     }
+
+    public List<Customer> findAllCustomers() {
+        return customerDao.getAll();
+    }
 }

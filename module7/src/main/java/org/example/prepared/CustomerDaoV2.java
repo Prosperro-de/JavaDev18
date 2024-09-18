@@ -7,13 +7,18 @@ import org.example.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDaoV2 {
     public static final String CREATE_CUSTOMER_SQL_TEMPLATE =
             "INSERT INTO customers(first_name, last_name, email, tel_number, post_code) " +
             "VALUES (?, ?, ?, ?, ?)";
+
+    public static final String GET_ALL_CUSTOMERS_SQL =
+            "SELECT * FROM customers";
 
 
     @SneakyThrows
@@ -67,5 +72,27 @@ public class CustomerDaoV2 {
         return customers;
     }
 
+    @SneakyThrows
+    public List<Customer> getAll() {
+        Connection connection = DataSource.getConnection();
+        List<Customer> result = new ArrayList<>();
+        try(PreparedStatement statement = connection.prepareStatement(GET_ALL_CUSTOMERS_SQL)) {
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                result.add(Customer.builder()
+                        .id(resultSet.getObject("id", Long.class))
+                        .firstName(resultSet.getString("first_name"))
+                        .lastName(resultSet.getString("last_name"))
+                        .email(resultSet.getString("email"))
+                        .postCode(resultSet.getString("tel_number"))
+                        .telNumber(resultSet.getString("post_code"))
+                        .build());
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw  ex;
+        }
+        return result;
+    }
 
 }
