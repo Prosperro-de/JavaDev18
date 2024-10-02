@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -51,21 +53,27 @@ public class DemoServer {
                 OutputStream out = clientSocket.getOutputStream()
         ) {
             String receivedMessage = in.readLine();
-
             if (receivedMessage != null) {
                 System.out.println("Client request message: " + receivedMessage);
 
-                String htmlResponse = getHTMLResponse();
+                //TODO: parse path code from receivedMessage
+//                String htmlResponse = getHTMLResponse();
+
+                byte[] imageByteArray = HttpClientDemo.getAllBytesForImage("http.cat", "/418");
+
                 String serverResponse = "HTTP/1.1 200 OK" + END_OF_MESSAGE_MARK +
-                                        "Content-Type: text/html" + END_OF_MESSAGE_MARK +
-                                        "Content-Length: " + htmlResponse.length() + END_OF_MESSAGE_MARK +
-                                        END_OF_MESSAGE_MARK +
-                                        htmlResponse;
+                                        "Content-Type: image/jpeg" + END_OF_MESSAGE_MARK +
+//                                        "Content-Length: " + htmlResponse.length() + END_OF_MESSAGE_MARK +
+                                        "Content-Length: " + imageByteArray.length + END_OF_MESSAGE_MARK +
+                                        END_OF_MESSAGE_MARK;
                 out.write(serverResponse.getBytes());
+                out.write(imageByteArray);
                 out.flush();
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
         } finally {
             try {
                 clientSocket.close();
