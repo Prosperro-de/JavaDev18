@@ -20,6 +20,7 @@
         <module>module7</module>
         <module>module8</module>
         <module>module9</module>
+        <module>module10</module>
     </modules>
 
     <properties>
@@ -88,6 +89,13 @@
             <artifactId>flyway-database-postgresql</artifactId>
             <version>10.18.0</version>
             <scope>runtime</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.1.0</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>
