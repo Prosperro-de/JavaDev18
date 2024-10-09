@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+
+<!--    <form class="form-group" action="/customer" method="POST">-->
+<form id="customer-form">
+    <div class="mb-3">
+        <label for="firstName" class="form-label">First name:</label>
+        <input type="text" id="firstName" class="form-control" name="firstName">
+    </div>
+
+    <div class="mb-3">
+        <label for="lastName" class="form-label">Last name:</label>
+        <input type="text" id="lastName" class="form-control" name="lastName">
+    </div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="text" id="email" class="form-control" name="email">
+    </div>
+    <div class="mb-3">
+        <label for="telNumber" class="form-label">Tel number:</label>
+        <input type="text" id="telNumber" class="form-control" name="telNumber">
+    </div>
+    <div class="mb-3">
+        <label for="postCode" class="form-label">Post code:</label>
+        <input type="text" id="postCode" class="form-control" name="postCode">
+    </div>
+</form>
+<button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function (event) {
+
+        document.getElementById('submit-button').addEventListener('click', function () {
+            const form = document.getElementById("customer-form");
+            const formData = new FormData(form);
+            const formObj = Object.fromEntries(formData);
+
+            const jsonData = JSON.stringify(formObj);
+            console.log(jsonData);
+
+            fetch('/customer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonData
+            });
+        });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+<!--DemoDetailsServlet-->
+
+<!--<h1>Please enter your data</h1>-->
+
+<!--<form action="/details" method="POST">-->
+<!--    <label for="name">Name:</label>-->
+<!--    <input type="text" id="name" name="name">-->
+<!--    <br>-->
+<!--    <br>-->
+
+<!--    <label for="email">Email:</label>-->
+<!--    <input type="text" id="email" name="email">-->
+<!--    <br>-->
+<!--    <br>-->
+
+<!--    <button type="submit">Submit</button>-->
+<!--</form>-->
+
+
+<!--<script>-->
+<!--    document.addEventListener('DOMContentLoaded', function () {-->
+<!--        document.getElementById('submit-button').addEventListener('click', function () {-->
+<!--            const form = document.getElementById("customer-form");-->
+<!--            const formData = new FormData(form);-->
+<!--            const formObj = Object.fromEntries(formData);-->
+
+<!--            const jsonData = JSON.stringify(formObj);-->
+
+<!--            fetch('/customers', {-->
+<!--                method: 'POST',-->
+<!--                headers: {-->
+<!--                    'Content-Type': 'application/json'-->
+<!--                },-->
+<!--                body: jsonData-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
