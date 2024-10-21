@@ -10,8 +10,8 @@
 <body>
 
 
-<!--    <form class="form-group" action="/customer" method="POST">-->
-<form id="customer-form">
+<!--<form class="form-group" action="/customer" method="POST">-->
+    <form id="customer-form">
     <div class="mb-3">
         <label for="firstName" class="form-label">First name:</label>
         <input type="text" id="firstName" class="form-control" name="firstName">
@@ -40,7 +40,6 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function (event) {
-
         document.getElementById('submit-button').addEventListener('click', function () {
             const form = document.getElementById("customer-form");
             const formData = new FormData(form);

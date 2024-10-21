@@ -19,7 +19,8 @@ public class CustomerServlet extends HttpServlet {
 //        req.getParameterMap()
 //                .forEach((k, v) -> System.out.println(k + " : " + v[0]));
         try {
-            customerService.saveCustomer(req.getParameterMap());
+//            customerService.saveCustomer(req.getParameterMap());
+            customerService.saveCustomer(req.getReader());
             resp.setStatus(200);
         } catch (Exception e) {
             resp.setStatus(500);

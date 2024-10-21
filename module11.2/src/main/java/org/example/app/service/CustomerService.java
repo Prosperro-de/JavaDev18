@@ -8,12 +8,21 @@ import org.example.app.util.RequestToEntityMapper;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 public class CustomerService {
     private GenericDao dao = new GenericDao();
     private ObjectMapper objectMapper = new ObjectMapper();
 
+    public Customer findById(Long id)  {
+        return dao.findById(id, Customer.class);
+    }
+
+    public List<Customer> findAll() {
+        return dao.findAll(Customer.class);
+    }
 
     public void saveCustomer(Map<String, String[]> parameterMap) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         Customer customer = RequestToEntityMapper.mapToEntity(parameterMap, Customer.class);
