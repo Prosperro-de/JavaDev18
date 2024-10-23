@@ -12,22 +12,36 @@ public class Demo {
 
         try(Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
-//            Customer customer = session.get(Customer.class, 1L);
+//            Customer customer = session.find(Customer.class, 1L);
+//            Customer customer1 = session.find(Customer.class, 1L);
+//            session.detach(customer);
+//            session.merge(customer);
+
+//            customer.setFirstName("Mykola55");
+//            session.remove(customer);
+//            session.persist(customer);
 //            System.out.println("customer = " + customer);
+//            customer.setFirstName("Mykola2");
+
+//            session.detach(customer);
 
             Customer customer = Customer.builder()
 //                    .id(1223423L)
                     .firstName("Hiber")
                     .lastName("Nate")
-                    .email("redhut3@gmail.com")
+                    .email("redhut10@gmail.com")
                     .telNumber("555-444")
                     .postCode("432-12")
                     .build();
-            System.out.println("customer = " + customer);
             session.persist(customer);
-            System.out.println("customer = " + customer);
-
-            transaction.rollback();
+            Customer customer1 = session.find(Customer.class, customer.getId());
+//            customer.setFirstName("Mykola");
+//            System.out.println("customer = " + customer);
+//            session.persist(customer);
+//            System.out.println("customer = " + customer);
+//
+//            System.out.println("customer = " + customer);
+            transaction.commit();
         }
 
     }
