@@ -17,7 +17,7 @@
 
 
 <div th:if="${action.equals('createCustomerForm')}">
-<!--    <form class="form-group" action="/customer" method="POST">-->
+    <!--    <form class="form-group" action="/customer" method="POST">-->
     <form class="mt-3" id="customer-form">
         <div class="mb-3">
             <label for="firstName" class="form-label">First name:</label>
@@ -64,6 +64,8 @@
     <p>Email: <span th:text="${customer.getEmail()}"></span></p>
     <p>Phone: <span th:text="${customer.getTelNumber()}"></span></p>
     <p>Post code: <span th:text="${customer.getPostCode()}"></span></p>
+    <p>Date of birth: <span th:text="${customer.getCustomerDetails().getDateOfBirth()}"></span></p>
+    <p>Loyalty Points: <span th:text="${customer.getCustomerDetails().getLoyaltyPoints()}"></span></p>
 </div>
 
 <div th:if="${action.equals('allCustomerDetails')}">

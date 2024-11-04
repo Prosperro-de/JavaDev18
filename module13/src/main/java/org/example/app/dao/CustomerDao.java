@@ -29,11 +29,19 @@ public class CustomerDao {
     public Customer findById(Long id) {
         try (var session = sessionFactory.openSession()) {
             var transaction = session.beginTransaction();
-            var customer = session.find(Customer.class, id);
+//            var customer = session.find(Customer.class, id);
+            var query = "SELECT c FROM Customer c "
+                    + "LEFT JOIN FETCH c.orders o "
+                    + "WHERE c.id = :id";
+            var customer = session.createQuery(query, Customer.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
             transaction.commit();
             return customer;
         }
     }
+
+
 
 //    public Customer findByEmail(String email) {
 //        try (var session = sessionFactory.openSession()) {
@@ -101,7 +109,8 @@ public class CustomerDao {
     public static void main(String[] args) {
         CustomerDao customerDao = new CustomerDao();
 
-        System.out.println("customerDao.findByEmail(\"alice.johnson@example.com\") = " + customerDao.findByEmail("alice.johnson@example.com"));
+        var customer = customerDao.findById(1L);
+        System.out.println(customer);
     }
 
     public List<Customer> findAll() {
@@ -110,8 +119,8 @@ public class CustomerDao {
             //SELECT * FROM customers
             var customersQuery = session.createQuery(
                     "from Customer", Customer.class);
-            customersQuery.setFirstResult(5);
-            customersQuery.setMaxResults(5);
+//            customersQuery.setFirstResult(5);
+//            customersQuery.setMaxResults(5);
             var customers = customersQuery.getResultList();
             transaction.commit();
             return customers;
