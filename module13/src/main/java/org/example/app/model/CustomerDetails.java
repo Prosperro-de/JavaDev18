@@ -10,6 +10,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -19,7 +20,6 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "customer")
 @Entity
 @Table(name = "customer_details")
 public class CustomerDetails {
@@ -33,5 +33,7 @@ public class CustomerDetails {
     @OneToOne
     @MapsId
     @JoinColumn(name = "id")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Customer customer;
 }

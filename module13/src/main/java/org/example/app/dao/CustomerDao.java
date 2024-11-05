@@ -6,6 +6,7 @@ import org.example.app.config.HibernateConfig;
 import org.example.app.dao.projection.CustomerProjection;
 import org.example.app.exception.DatabaseException;
 import org.example.app.model.Customer;
+import org.example.app.model.Order;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
@@ -38,6 +39,25 @@ public class CustomerDao {
                     .getSingleResult();
             transaction.commit();
             return customer;
+        }
+    }
+
+    public void addOrderToCustomer(Long customerId, Order order) {
+        try (var session = sessionFactory.openSession()) {
+            var transaction = session.beginTransaction();
+            var customer = session.find(Customer.class, customerId);
+            customer.addOrder(order);
+            transaction.commit();
+        }
+    }
+
+    public void removeOrderFromCustomer(Long customerId, Long orderId) {
+        try (var session = sessionFactory.openSession()) {
+            var transaction = session.beginTransaction();
+            var customer = session.find(Customer.class, customerId);
+            var order = session.find(Order.class, orderId);
+            customer.removeOrder(order);
+            transaction.commit();
         }
     }
 
