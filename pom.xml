@@ -24,6 +24,7 @@
         <module>module11.2</module>
         <module>module12</module>
         <module>module13</module>
+        <module>di-demo</module>
     </modules>
 
     <properties>

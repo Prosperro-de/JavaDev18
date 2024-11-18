@@ -3,6 +3,8 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/demo/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/demo/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/di-demo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/di-demo/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module10/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module10/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module11.2/src/main/java" charset="UTF-8" />
@@ -14,6 +16,7 @@
     <file url="file://$PROJECT_DIR$/module13/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module13/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module14/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module15/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module2/checkstyle/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module2/checkstyle/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module2/solid/src/main/java" charset="UTF-8" />
