@@ -19,6 +19,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.ArrayList;

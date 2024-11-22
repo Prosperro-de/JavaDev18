@@ -2,43 +2,46 @@ package org.example.module15.controller;
 
 import lombok.AllArgsConstructor;
 import org.example.module15.model.Customer;
+import org.example.module15.model.dto.CustomerResponse;
 import org.example.module15.service.CustomerService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import java.util.List;
+
+
+@RestController
+@RequestMapping("/api/v1/customers")
 @AllArgsConstructor
 public class CustomerController {
     private final CustomerService customerService;
 
-    @GetMapping("/findById")
-    public ModelAndView findById(@RequestParam Long customerId) {
-        ModelAndView modelAndView = new ModelAndView("index");
-        Customer result = customerService.findById(customerId);
-        modelAndView.addObject("action", "customerDetails");
-        modelAndView.addObject("customer", result);
-        return modelAndView;
+    @GetMapping("/{id}") // http://localhost:8080/api/v1/customers/1
+    public CustomerResponse findById(@PathVariable Long id) {
+        return customerService.findById(id);
     }
 
-    @GetMapping("/findAllCustomers")
-    public ModelAndView findAllCustomers() {
-        ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("action", "allCustomerDetails");
-        modelAndView.addObject("customers", customerService.findAll());
-        return modelAndView;
+    @GetMapping()// http://localhost:8080/api/v1/customers
+    public List<CustomerResponse> findAll() {
+        return customerService.findAll();
     }
 
-    @PostMapping("/createCustomer")
+    @PostMapping()// http://localhost:8080/api/v1/customers
     @ResponseStatus(HttpStatus.CREATED)
-    public ModelAndView createCustomer(@RequestBody Customer customer) {
-        ModelAndView modelAndView = new ModelAndView("index");
-        customerService.saveCustomer(customer);
-        return modelAndView;
+    public void createCustomer(@RequestBody Customer customer) {
+
+    }
+
+    @PostMapping("/{id}/orders")// http://localhost:8080/api/v1/customers/{id}/orders
+    public void createOrderForCustomer(@PathVariable  Long id, @RequestBody String orderRequestBody) {
+
     }
 }
