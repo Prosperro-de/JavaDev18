@@ -25,6 +25,7 @@
         <module>module12</module>
         <module>module13</module>
         <module>di-demo</module>
+        <module>proxy-demo</module>
     </modules>
 
     <properties>

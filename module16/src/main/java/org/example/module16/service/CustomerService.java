@@ -1,17 +1,18 @@
 package org.example.module16.service;
 
-import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.example.module16.exception.EntityNotFoundException;
 import org.example.module16.mapper.CustomerMapper;
 import org.example.module16.model.Customer;
-import org.example.module16.model.dto.CustomerCreateRequest;
-import org.example.module16.model.dto.CustomerResponse;
+import org.example.module16.model.dto.request.CustomerCreateRequest;
+import org.example.module16.model.dto.response.CustomerResponse;
+import org.example.module16.model.dto.request.CustomerUpdateRequest;
 import org.example.module16.repository.CustomerRepository;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,15 +37,50 @@ public class CustomerService {
         return customerMapper.toCustomerResponse(customer);
     }
 
+    public Page<CustomerResponse> findAll(PageRequest pageRequest) {
+        return customerRepository.findAll(pageRequest)
+                .map(customerMapper::toCustomerResponse);
+    }
+
     @Transactional
     public Long createCustomer(CustomerCreateRequest request) {
         Customer customer = customerMapper.toCustomer(request);
         customer.getCustomerDetails().setLoyaltyPoints(0);
-        customer.getCustomerDetails().setCustomer(customer);
         return customerRepository
                 .save(customer)
                 .getId();
     }
 
+    public CustomerResponse findByEmail(String email) {
+        return customerMapper.toCustomerResponse(
+                customerRepository.getCustomerByEmail(email)
+                    .orElseThrow(() -> new EntityNotFoundException("Customer with email " + email + " not found")));
+    }
 
+    @Transactional
+    public CustomerResponse updateCustomer(Long id, CustomerUpdateRequest request) {
+        Customer customer = customerRepository.findForUpdateById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Customer with id " + id + " not found"));
+        customer.setFirstName(request.firstName());
+        customer.setLastName(request.lastName());
+        customer.setTelNumber(request.telNumber());
+        customer.setPostCode(request.postCode());
+        if (customer.getCustomerDetails() != null) {
+            customer.getCustomerDetails().setDateOfBirth(request.dateOfBirth());
+            customer.getCustomerDetails().setLoyaltyPoints(request.loyaltyPoints());
+        }
+        return customerMapper.toCustomerResponse(customer);
+    }
+
+    public List<CustomerResponse> findForLastName(String lastName) {
+        return customerMapper.toCustomerResponseList(
+                customerRepository.findAll(
+                        getByLastNameSpecification(lastName)));
+    }
+
+    private Specification<Customer> getByLastNameSpecification(String lastName) {
+        return (root, query, builder) -> Optional.ofNullable(lastName)
+                .map(name -> builder.equal(root.get("lastName"), lastName))
+                .orElseGet(builder::conjunction);
+    }
 }

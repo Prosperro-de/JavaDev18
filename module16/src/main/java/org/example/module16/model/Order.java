@@ -11,6 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -41,6 +42,10 @@ public class Order {
 
     @Column(name = "order_status")
     private String status;
+
+    @Version
+    @Column(name = "version", nullable = false)
+    private Integer version;
 
     @Column(name = "total_price")
     private BigDecimal totalPrice;

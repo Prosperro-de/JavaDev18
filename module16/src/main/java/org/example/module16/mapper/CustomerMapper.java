@@ -1,11 +1,13 @@
 package org.example.module16.mapper;
 
 import org.example.module16.model.Customer;
-import org.example.module16.model.dto.CustomerCreateRequest;
-import org.example.module16.model.dto.CustomerResponse;
+import org.example.module16.model.dto.request.CustomerCreateRequest;
+import org.example.module16.model.dto.response.CustomerResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring",
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
@@ -18,4 +20,8 @@ public interface CustomerMapper {
     @Mapping(target = "customerDetails.dateOfBirth", source = "dateOfBirth")
     @Mapping(target = "customerDetails.loyaltyPoints", ignore = true)
     Customer toCustomer(CustomerCreateRequest createRequest);
+
+    @Mapping(target = "dateOfBirth", source = "customerDetails.dateOfBirth")
+    @Mapping(target = "loyaltyPoints", source = "customerDetails.loyaltyPoints")
+    List<CustomerResponse> toCustomerResponseList(List<Customer> customers);
 }

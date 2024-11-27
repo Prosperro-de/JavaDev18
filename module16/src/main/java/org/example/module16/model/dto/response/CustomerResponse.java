@@ -1,6 +1,5 @@
-package org.example.module16.model.dto;
+package org.example.module16.model.dto.response;
 
-import jakarta.persistence.Column;
 import lombok.Builder;
 
 import java.time.LocalDate;

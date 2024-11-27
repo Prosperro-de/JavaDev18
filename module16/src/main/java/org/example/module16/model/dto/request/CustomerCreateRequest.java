@@ -1,4 +1,4 @@
-package org.example.module16.model.dto;
+package org.example.module16.model.dto.request;
 
 import lombok.Builder;
 
