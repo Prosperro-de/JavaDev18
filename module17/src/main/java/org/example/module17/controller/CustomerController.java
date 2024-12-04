@@ -35,12 +35,6 @@ public class CustomerController {
 //        return customerService.findAll();
 //    }
 
-    @PostMapping()// http://localhost:8080/api/v1/customers
-    @ResponseStatus(HttpStatus.CREATED)
-    public Long createCustomer(@RequestBody CustomerCreateRequest request) {
-        return customerService.createCustomer(request);
-    }
-
 //    @GetMapping// http://localhost:8080/api/v1/customers?email=
 //    public CustomerResponse findByEmail(@RequestParam String email) {
 //        return customerService.findByEmail(email);

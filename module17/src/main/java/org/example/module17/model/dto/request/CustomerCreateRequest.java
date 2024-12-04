@@ -10,5 +10,6 @@ public record CustomerCreateRequest(String firstName,
                                     String email,
                                     String telNumber,
                                     String postCode,
-                                    LocalDate dateOfBirth) {
+                                    LocalDate dateOfBirth,
+                                    String password) {
 }

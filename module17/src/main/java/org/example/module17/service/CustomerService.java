@@ -41,14 +41,6 @@ public class CustomerService {
                 .map(customerMapper::toCustomerResponse);
     }
 
-    @Transactional
-    public Long createCustomer(CustomerCreateRequest request) {
-        Customer customer = customerMapper.toCustomer(request);
-        customer.getCustomerDetails().setLoyaltyPoints(0);
-        return customerRepository
-                .save(customer)
-                .getId();
-    }
 
     public CustomerResponse findByEmail(String email) {
         return customerMapper.toCustomerResponse(
