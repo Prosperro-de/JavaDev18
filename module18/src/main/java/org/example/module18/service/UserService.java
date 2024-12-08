@@ -6,6 +6,7 @@ import org.example.module18.model.Customer;
 import org.example.module18.model.CustomerDetails;
 import org.example.module18.model.User;
 import org.example.module18.model.dto.request.CustomerCreateRequest;
+import org.example.module18.model.dto.request.UserLoginRequest;
 import org.example.module18.repository.RoleRepository;
 import org.example.module18.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -55,5 +56,9 @@ public class UserService {
     public User findByUserName(String userName) {
         return userRepository.findByUserName(userName)
                 .orElseThrow(() -> new EntityNotFoundException("User " + userName + " not found"));
+    }
+
+    public String login(UserLoginRequest request) {
+        return null;
     }
 }
