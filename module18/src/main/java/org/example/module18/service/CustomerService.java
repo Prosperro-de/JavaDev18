@@ -73,4 +73,8 @@ public class CustomerService {
                 .map(name -> builder.equal(root.get("lastName"), lastName))
                 .orElseGet(builder::conjunction);
     }
+
+    public void deleteCustomer(Long id) {
+        customerRepository.deleteById(id);
+    }
 }
