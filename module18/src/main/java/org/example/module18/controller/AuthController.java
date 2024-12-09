@@ -33,9 +33,9 @@ public class AuthController {
 
     @PostMapping("/login")
     public String login(@RequestBody UserLoginRequest request) {
-//        authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(request.userName(), request.password())
-//        );
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.userName(), request.password())
+        );
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.userName());
         return jwtUtil.generateToken(userDetails);
     }
