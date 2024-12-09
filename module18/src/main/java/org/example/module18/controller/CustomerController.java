@@ -6,6 +6,7 @@ import org.example.module18.model.dto.response.CustomerResponse;
 import org.example.module18.service.CustomerService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -22,6 +23,7 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @GetMapping("/{id}") // http://localhost:8080/api/v1/customers/1
+    @PreAuthorize("@securityService.isUserMatchesPrincipal(#id)")
     public CustomerResponse findById(@PathVariable Long id) {
         return customerService.findById(id);
     }
@@ -42,6 +44,7 @@ public class CustomerController {
 //    }
 
     @PutMapping("/{id}") // http://localhost:8080/api/v1/customers/1
+    @PreAuthorize("@securityService.isUserMatchesPrincipal(#id)")
     public CustomerResponse updateCustomer(@PathVariable Long id, @RequestBody CustomerUpdateRequest request) {
         return customerService.updateCustomer(id, request);
     }
@@ -51,6 +54,5 @@ public class CustomerController {
                                           @RequestParam(defaultValue = "10") int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
         return customerService.findAll(pageRequest);
-//        return customerService.findAll();
     }
 }
