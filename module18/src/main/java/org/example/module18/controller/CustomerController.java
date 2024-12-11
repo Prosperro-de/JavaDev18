@@ -1,6 +1,13 @@
 package org.example.module18.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.AllArgsConstructor;
+import org.example.module18.annotation.TimeMetric;
 import org.example.module18.model.dto.request.CustomerUpdateRequest;
 import org.example.module18.model.dto.response.CustomerResponse;
 import org.example.module18.service.CustomerService;
@@ -19,13 +26,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/customers")
 @AllArgsConstructor
+@Tags(value = {
+        @Tag(name = "Customer controller", description = "Provides operations for managing customers")
+})
 public class CustomerController {
     private final CustomerService customerService;
 
+    @Operation(summary = "Find customer by id",
+            responses = {
+                    @ApiResponse(responseCode = "200",
+                            description = "OK",
+                            content = @Content(mediaType = "application/json",
+                                    contentSchema = @Schema(implementation = CustomerResponse.class))),
+                    @ApiResponse(responseCode = "404",
+                            description = "Customer not found")
+            }
+    )
+    @TimeMetric
     @GetMapping("/{id}") // http://localhost:8080/api/v1/customers/1
     @PreAuthorize("@securityService.isUserMatchesPrincipal(#id)")
     public CustomerResponse findById(@PathVariable Long id) {
-        return customerService.findById(id);
+         return customerService.findById(id);
     }
 
 //    @GetMapping()// http://localhost:8080/api/v1/customers
@@ -49,6 +70,7 @@ public class CustomerController {
         return customerService.updateCustomer(id, request);
     }
 
+    @TimeMetric
     @GetMapping
     public Page<CustomerResponse> findAll(@RequestParam(defaultValue = "0") int page,
                                           @RequestParam(defaultValue = "10") int size) {
